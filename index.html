@@ -45,6 +45,8 @@ function td(content, className="")
 
 <script>
 $(document).ready(function(){
+  $(".userInfo.address").hide();
+  
   $("input[name='p_or_d'][value='delivery']").click(function() {
  	 $(".userInfo.address").show();
   });
@@ -52,6 +54,8 @@ $(document).ready(function(){
   $("input[name='p_or_d'][value='pickup']").click(function() {
  	 $(".userInfo.address").hide();
   });
+  
+  
 });
 </script>
 
