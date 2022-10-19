@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>Jade Delight</title>
 </head>
 
@@ -40,6 +42,19 @@ function td(content, className="")
 </script>
 
 <h1>Jade Delight</h1>
+
+<script>
+$(document).ready(function(){
+  $("input[name='p_or_d'][value='delivery']").click(function() {
+ 	 $(".userInfo.address").show();
+  });
+  
+  $("input[name='p_or_d'][value='pickup']").click(function() {
+ 	 $(".userInfo.address").hide();
+  });
+});
+</script>
+
 <form>
 
 <p class="userInfo"><label>First Name:</label> <input type="text"  name='fname' /></p>
@@ -52,6 +67,7 @@ function td(content, className="")
 	<input type="radio"  name='p_or_d' value = 'delivery'/>
 	Delivery
 </p>
+
 <table border="0" cellpadding="3">
   <tr>
     <th>Select Item</th>
@@ -59,6 +75,7 @@ function td(content, className="")
     <th>Cost Each</th>
     <th>Total Cost</th>
   </tr>
+  
 <script>
 
   var s = "";
@@ -74,6 +91,7 @@ function td(content, className="")
   document.writeln(s);
 </script>
 </table>
+
 <p class="subtotal totalSection"><label>Subtotal</label>: 
    $ <input type="text"  name='subtotal' id="subtotal" />
 </p>
