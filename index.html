@@ -42,13 +42,12 @@ function td(content, className="")
 </script>
 
 <script> //editedbyme
-$(document).ready(function(){
+$(document).ready(function() {
   $(".selectQuantity").change(function() {  
     const a = parseFloat($(this).siblings(".cost").text().replace('$',''));
     const q = $(this).children().val();
     const totalpricething = (a * q).toFixed(2);
-    $(this).siblings(".totalCost").text(totalpricething);
-    //$(".totalCost").val(totalpricething);
+    $(this).siblings(".totalCost").children().val(totalpricething);
   })
 });
 </script>
