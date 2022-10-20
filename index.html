@@ -136,29 +136,50 @@ $(document).ready(function() {
 </form>
 
 <script> //editedbyme
+//function validate() {
 $(document).ready(function(){
   $("input[type='button'][value='Submit Order']").click(function(){
-  
+    
+    if ($("input[name='total']").val() == 0) {
+    	alert("Add at least one item.");
+    }
+    
+    if (!$("input[name='lname']").val()) {
+    	alert("Enter required last name.");
+    }
+    
+    /*if ($("input[name='phone']").match(/^\d+$/)) {
+    	if (($(this).val().length == 7)) || ($(this).val().length == 10))) {
+        	alert("Phone number qualifies);
+        } else {
+        	alert("Enter valid phone number."); 
+        } 
+    } else {
+    	alert("Enter valid phone number.");
+    }*/
+    
+    
     if ($("input[name='p_or_d'][value='delivery']").is(':checked')) {
         if (!$("input[name='street']").val()) {
-        	alert("Enter required street field");
+        	alert("Enter required street field.");
         }
         
         if (!$("input[name='city']").val()) {
-        	alert("Enter required city field");
+        	alert("Enter required city field.");
         }
         
-        if ($("input[name='city']").val() && $("input[name='street']").val()) {
+        if ($("input[name='city']").val() && $("input[name='street']").val() && $("input[name='lname']").val()) {
         	const deliverytime = new Date(new Date().getTime()+(40*60*1000));
-    		alert("Estimated delivery time:" + deliverytime + ".");
+    		alert("Estimated delivery time: " + deliverytime + ".");
         }
         
-    } else if ($("input[name='p_or_d'][value='pickup']").is(':checked')) {
+    } else if ($("input[name='p_or_d'][value='pickup']").is(':checked') && $("input[name='lname']").val()) {
       	const pickuptime = new Date(new Date().getTime()+(20*60*1000));
-    	alert("Estimated pickup time:" + pickuptime + ".");
-    }; 
+    	alert("Estimated pickup time: " + pickuptime + ".");
+    };
   })
 });
+//}
 </script>
 </body>
 </html>
