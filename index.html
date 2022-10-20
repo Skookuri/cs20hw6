@@ -41,17 +41,6 @@ function td(content, className="")
 	
 </script>
 
-<script> //editedbyme
-$(document).ready(function() {
-  $(".selectQuantity").change(function() {  
-    const a = parseFloat($(this).siblings(".cost").text().replace('$',''));
-    const q = $(this).children().val();
-    const totalpricething = (a * q).toFixed(2);
-    $(this).siblings(".totalCost").children().val(totalpricething);
-  })
-});
-</script>
-
 <h1>Jade Delight</h1>
 
 <script> //editedbyme
@@ -65,6 +54,29 @@ $(document).ready(function(){
   $("input[name='p_or_d'][value='pickup']").click(function() {
  	 $(".userInfo.address").hide();
   });  
+});
+//pickup/delivery hiding/showing implementation
+
+$(document).ready(function() {
+  $(".selectQuantity").change(function() {  
+    const a = parseFloat($(this).siblings(".cost").text().replace('$',''));
+    const q = $(this).children().val();
+    const totalpricething = (a * q).toFixed(2);
+    
+    $(this).siblings(".totalCost").children().val(totalpricething).trigger('change');
+  })
+  //item total cost implementation
+  
+  $(".totalCost").change(function() {
+  	var subtotalthing = 0;
+  	$(".totalCost").each(function() {
+  		subtotalthing += +$(this).children().val();
+  	});
+    
+
+    $(".subtotal").children().val(subtotalthing.toFixed(2));
+  })
+  //subtotal cost implementation
 });
 </script>
 
