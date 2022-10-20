@@ -41,9 +41,21 @@ function td(content, className="")
 	
 </script>
 
+<script> //editedbyme
+$(document).ready(function(){
+  $(".selectQuantity").change(function() {  
+    const a = parseFloat($(this).siblings(".cost").text().replace('$',''));
+    const q = $(this).children().val();
+    const totalpricething = (a * q).toFixed(2);
+    $(this).siblings(".totalCost").text(totalpricething);
+    //$(".totalCost").val(totalpricething);
+  })
+});
+</script>
+
 <h1>Jade Delight</h1>
 
-<script>
+<script> //editedbyme
 $(document).ready(function(){
   $(".userInfo.address").hide();
   
@@ -53,9 +65,7 @@ $(document).ready(function(){
   
   $("input[name='p_or_d'][value='pickup']").click(function() {
  	 $(".userInfo.address").hide();
-  });
-  
-  
+  });  
 });
 </script>
 
@@ -108,5 +118,13 @@ $(document).ready(function(){
 <input type = "button" value = "Submit Order" />
 
 </form>
+
+<script> //editedbyme
+$(document).ready(function(){
+  $("button").click(function(){
+    $(".totalSection").hide(1000);
+  })
+});
+</script>
 </body>
 </html>
