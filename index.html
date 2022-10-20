@@ -140,8 +140,18 @@ $(document).ready(function(){
   $("input[type='button'][value='Submit Order']").click(function(){
   
     if ($("input[name='p_or_d'][value='delivery']").is(':checked')) {
-    	const deliverytime = new Date(new Date().getTime()+(40*60*1000));
-    	alert("Estimated delivery time:" + deliverytime + ".");
+        if (!$("input[name='street']").val()) {
+        	alert("Enter required street field");
+        }
+        
+        if (!$("input[name='city']").val()) {
+        	alert("Enter required city field");
+        }
+        
+        if ($("input[name='city']").val() && $("input[name='street']").val()) {
+        	const deliverytime = new Date(new Date().getTime()+(40*60*1000));
+    		alert("Estimated delivery time:" + deliverytime + ".");
+        }
         
     } else if ($("input[name='p_or_d'][value='pickup']").is(':checked')) {
       	const pickuptime = new Date(new Date().getTime()+(20*60*1000));
