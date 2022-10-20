@@ -73,8 +73,12 @@ $(document).ready(function() {
   		subtotalthing += +$(this).children().val();
   	});
     
+    var tax = subtotalthing*0.0625;
+    var finaltotal = subtotalthing + tax;
 
     $(".subtotal").children().val(subtotalthing.toFixed(2));
+    $(".tax").children().val(tax.toFixed(2));
+    $(".total").children().val(finaltotal.toFixed(2));
   })
   //subtotal cost implementation
 });
