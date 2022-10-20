@@ -82,6 +82,7 @@ $(document).ready(function() {
   })
   //subtotal cost implementation
 });
+//cost implementation
 </script>
 
 <form>
@@ -136,8 +137,16 @@ $(document).ready(function() {
 
 <script> //editedbyme
 $(document).ready(function(){
-  $("button").click(function(){
-    $(".totalSection").hide(1000);
+  $("input[type='button'][value='Submit Order']").click(function(){
+  
+    if ($("input[name='p_or_d'][value='delivery']").is(':checked')) {
+    	const deliverytime = new Date(new Date().getTime()+(40*60*1000));
+    	alert("Estimated delivery time:" + deliverytime + ".");
+        
+    } else if ($("input[name='p_or_d'][value='pickup']").is(':checked')) {
+      	const pickuptime = new Date(new Date().getTime()+(20*60*1000));
+    	alert("Estimated pickup time:" + pickuptime + ".");
+    }; 
   })
 });
 </script>
