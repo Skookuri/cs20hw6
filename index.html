@@ -136,50 +136,56 @@ $(document).ready(function() {
 </form>
 
 <script> //editedbyme
-//function validate() {
 $(document).ready(function(){
   $("input[type='button'][value='Submit Order']").click(function(){
     
     if ($("input[name='total']").val() == 0) {
     	alert("Add at least one item.");
-    }
+    } //checks total input
     
     if (!$("input[name='lname']").val()) {
     	alert("Enter required last name.");
-    }
+    } //checks name input
     
-    /*if ($("input[name='phone']").match(/^\d+$/)) {
-    	if (($(this).val().length == 7)) || ($(this).val().length == 10))) {
-        	alert("Phone number qualifies);
-        } else {
-        	alert("Enter valid phone number."); 
-        } 
-    } else {
-    	alert("Enter valid phone number.");
-    }*/
+    let phonenumber = $("input[name='phone']").val();
+    //alert("Original input :" + phonenumber);
+    
+    let numberonly = phonenumber.replace(/\D/g,'');
+    //alert("Fixed input :" + numberonly);
+    
+    
+    if (numberonly.length > 7 && numberonly.length != 10) {
+    	alert("Enter valid phone number. Entered numbers: " + numberonly + " and " + numberonly.length + " digit(s) long.");
+    } else if (numberonly.length != 7) {    
+    	alert("Enter valid phone number. Entered numbers: " + numberonly + " and " + numberonly.length + " digit(s) long.");
+    }
+    //checks phone input
     
     
     if ($("input[name='p_or_d'][value='delivery']").is(':checked')) {
         if (!$("input[name='street']").val()) {
         	alert("Enter required street field.");
-        }
+        } //checks street input
         
         if (!$("input[name='city']").val()) {
         	alert("Enter required city field.");
-        }
+        } //checks street input
         
-        if ($("input[name='city']").val() && $("input[name='street']").val() && $("input[name='lname']").val()) {
+        if ($("input[name='city']").val() && $("input[name='street']").val() && $("input[name='lname']").val() && $("input[name='total']").val() != 0 && numberonly.length == 7 || numberonly.length == 10) {
         	const deliverytime = new Date(new Date().getTime()+(40*60*1000));
-    		alert("Estimated delivery time: " + deliverytime + ".");
+    		//alert("Estimated delivery time: " + deliverytime + ".");
+            alert("Thank you for your order.");
+            window.open( "https://www.geeksforgeeks.org", "_blank");
         }
         
-    } else if ($("input[name='p_or_d'][value='pickup']").is(':checked') && $("input[name='lname']").val()) {
+    } else if ($("input[name='p_or_d'][value='pickup']").is(':checked') && $("input[name='lname']").val() && $("input[name='total']").val() != 0 && numberonly.length == 7 || numberonly.length == 10) {
       	const pickuptime = new Date(new Date().getTime()+(20*60*1000));
-    	alert("Estimated pickup time: " + pickuptime + ".");
-    };
-  })
+    	//alert("Estimated pickup time: " + pickuptime + ".");
+        alert("Thank you for your order.");
+        window.open( "https://www.geeksforgeeks.org", "_blank");
+    }
+  });
 });
-//}
 </script>
 </body>
 </html>
