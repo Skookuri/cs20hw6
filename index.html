@@ -154,9 +154,13 @@ $(document).ready(function(){
     //alert("Fixed input :" + numberonly);
     
     
-    if (numberonly.length > 7 && numberonly.length != 10) {
+    if (numberonly.length > 10) {
     	alert("Enter valid phone number. Entered numbers: " + numberonly + " and " + numberonly.length + " digit(s) long.");
-    } else if (numberonly.length != 7) {    
+    } else if (numberonly.length < 7) {    
+    	alert("Enter valid phone number. Entered numbers: " + numberonly + " and " + numberonly.length + " digit(s) long.");
+    } else if (numberonly.length == 8) {    
+    	alert("Enter valid phone number. Entered numbers: " + numberonly + " and " + numberonly.length + " digit(s) long.");
+    } else if (numberonly.length == 9) {    
     	alert("Enter valid phone number. Entered numbers: " + numberonly + " and " + numberonly.length + " digit(s) long.");
     }
     //checks phone input
