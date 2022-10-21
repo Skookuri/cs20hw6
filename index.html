@@ -175,14 +175,14 @@ $(document).ready(function(){
         	const deliverytime = new Date(new Date().getTime()+(40*60*1000));
     		//alert("Estimated delivery time: " + deliverytime + ".");
             alert("Thank you for your order.");
-            window.open( "https://www.geeksforgeeks.org", "_blank");
+            window.open( "https://skookuri.github.io/cs20hw6/orderinfo", "_blank");
         }
         
     } else if ($("input[name='p_or_d'][value='pickup']").is(':checked') && $("input[name='lname']").val() && $("input[name='total']").val() != 0 && numberonly.length == 7 || numberonly.length == 10) {
       	const pickuptime = new Date(new Date().getTime()+(20*60*1000));
     	//alert("Estimated pickup time: " + pickuptime + ".");
         alert("Thank you for your order.");
-        window.open( "https://www.geeksforgeeks.org", "_blank");
+        window.open( "https://skookuri.github.io/cs20hw6/orderinfo", "_blank");
     }
   });
 });
