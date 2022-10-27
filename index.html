@@ -44,6 +44,43 @@ function td(content, className="")
 <h1>Jade Delight</h1>
 
 <script> //editedbyme
+var styles = `
+    body { 
+        background-color: #00A36C;
+        color: white;
+        text-align: center;
+    }
+    
+    table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    select, input[type=button] {
+    	background-color: black;
+        color: white;
+        opacity: 40%
+    }
+    
+    select:hover, input[type=button]:hover {
+    	color: #00A36C;
+        background-color: white;
+        transition: 0.4s;
+        opacity: 100%
+    }
+    
+    input[type=text] {
+    	background-color: white;
+        opacity: 40%
+    }   
+`
+
+var styleSheet = document.createElement("style")
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);
+
+
+
 $(document).ready(function(){
   $(".userInfo.address").hide();
   
@@ -238,6 +275,40 @@ $(document).ready(function(){
         alert("Thank you for your order.");
         
         var order = window.open( "https://skookuri.github.io/cs20hw6/orderinfo", "height=600, width=600");
+        
+        var styles = `
+        body { 
+        	background-color: #00A36C;
+        	color: white;
+        	text-align: center;
+    	}
+    
+    	table {
+        	margin-left: auto;
+        	margin-right: auto;
+    	}
+    
+    	select, input[type=button] {
+    		background-color: black;
+        	color: white;
+        	opacity: 40%
+    	}
+    
+    	select:hover, input[type=button]:hover {
+          color: #00A36C;
+        	background-color: white;
+        	transition: 0.4s;
+        	opacity: 100%
+    	}
+    
+    	input[type=text] {
+    		background-color: white;
+        	opacity: 40%
+    	}   
+		`
+        var styleSheet = order.document.createElement("style");
+		styleSheet.innerText = styles;
+		order.document.head.appendChild(styleSheet);
         order.document.write("First Name: " + $("input[name='fname']").val());
         order.document.write("<br>");
         order.document.write("Last Name: " + $("input[name='lname']").val());
