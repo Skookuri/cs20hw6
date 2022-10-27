@@ -192,11 +192,40 @@ $(document).ready(function(){
             order.document.write("Phone Number: " + numberonly);
             order.document.write("<br>");
             
-            order.document.write("Subtotal: $" + numberonly);
+            
+            
+            order.document.write("Quantity Chicken Chop Suey ordered: " + $('select[name="quan0"]').val());
             order.document.write("<br>");
-            order.document.write("Mass tax 6.25%: $" + numberonly);
+            order.document.write("Total Cost for Chicken Chop Suey: $" + $('select[name="quan0"]').parent().siblings("td.totalCost").children().val());
             order.document.write("<br>");
-            order.document.write("Total: $" + numberonly);
+        
+            order.document.write("Quantity Sweet and Sour Pork ordered: " + $('select[name="quan1"]').val());
+            order.document.write("<br>");
+            order.document.write("Total Cost for Sweet and Sour Pork: $" + $('select[name="quan1"]').parent().siblings("td.totalCost").children().val());
+            order.document.write("<br>");
+        
+            order.document.write("Quantity Shrimp Lo Mein ordered: " + $('select[name="quan2"]').val());
+            order.document.write("<br>");
+            order.document.write("Total Cost for Shrimp Lo Mein: $" + $('select[name="quan2"]').parent().siblings("td.totalCost").children().val());
+            order.document.write("<br>");
+        
+            order.document.write("Quantity Moo Shi Chicken ordered: " + $('select[name="quan3"]').val());
+            order.document.write("<br>");
+            order.document.write("Total Cost for Moo Shi Chicken: $" + $('select[name="quan3"]').parent().siblings("td.totalCost").children().val());
+            order.document.write("<br>");
+        
+            order.document.write("Quantity Fried Rice ordered: " + $('select[name="quan4"]').val());
+            order.document.write("<br>");
+            order.document.write("Total Cost for Fried Rice: $" + $('select[name="quan4"]').parent().siblings("td.totalCost").children().val());
+            order.document.write("<br>");
+            
+            
+            
+            order.document.write("Subtotal: $" + $(".subtotal").children().val());
+            order.document.write("<br>");
+            order.document.write("Mass tax 6.25%: $" + $(".tax").children().val());
+            order.document.write("<br>");
+            order.document.write("Total: $" + $(".total").children().val());
             order.document.write("<br>");
             
             order.document.write("Estimated delivery time: " + deliverytime + ".");
@@ -209,7 +238,6 @@ $(document).ready(function(){
         alert("Thank you for your order.");
         
         var order = window.open( "https://skookuri.github.io/cs20hw6/orderinfo", "height=600, width=600");
-        
         order.document.write("First Name: " + $("input[name='fname']").val());
         order.document.write("<br>");
         order.document.write("Last Name: " + $("input[name='lname']").val());
@@ -217,15 +245,45 @@ $(document).ready(function(){
         order.document.write("Phone Number: " + numberonly);
         order.document.write("<br>");
         
-        order.document.write("Subtotal: $" + numberonly);
+        
+        
+        order.document.write("Quantity Chicken Chop Suey ordered: " + $('select[name="quan0"]').val());
         order.document.write("<br>");
-        order.document.write("Mass tax 6.25%: $" + numberonly);
+        order.document.write("Total Cost for Chicken Chop Suey: $" + $('select[name="quan0"]').parent().siblings("td.totalCost").children().val());
         order.document.write("<br>");
-        order.document.write("Total: $" + numberonly);
+        
+        order.document.write("Quantity Sweet and Sour Pork ordered: " + $('select[name="quan1"]').val());
+        order.document.write("<br>");
+        order.document.write("Total Cost for Sweet and Sour Pork: $" + $('select[name="quan1"]').parent().siblings("td.totalCost").children().val());
+        order.document.write("<br>");
+        
+        order.document.write("Quantity Shrimp Lo Mein ordered: " + $('select[name="quan2"]').val());
+        order.document.write("<br>");
+        order.document.write("Total Cost for Shrimp Lo Mein: $" + $('select[name="quan2"]').parent().siblings("td.totalCost").children().val());
+        order.document.write("<br>");
+        
+        order.document.write("Quantity Moo Shi Chicken ordered: " + $('select[name="quan3"]').val());
+        order.document.write("<br>");
+        order.document.write("Total Cost for Moo Shi Chicken: $" + $('select[name="quan3"]').parent().siblings("td.totalCost").children().val());
+        order.document.write("<br>");
+        
+        order.document.write("Quantity Fried Rice ordered: " + $('select[name="quan4"]').val());
+        order.document.write("<br>");
+        order.document.write("Total Cost for Fried Rice: $" + $('select[name="quan4"]').parent().siblings("td.totalCost").children().val());
+        order.document.write("<br>");
+        
+        
+        
+        order.document.write("Subtotal: $" + $(".subtotal").children().val());
+        order.document.write("<br>");
+        order.document.write("Mass tax 6.25%: $" + $(".tax").children().val());
+        order.document.write("<br>");
+        order.document.write("Total: $" + $(".total").children().val());
         order.document.write("<br>");
         
         order.document.write("Estimated pickup time: " + pickuptime + ".");
         order.document.write("<br>");
+        
     }
   });
 });
