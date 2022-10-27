@@ -1,6 +1,9 @@
+
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>Jade Delight</title>
 </head>
 
@@ -35,10 +38,90 @@ function td(content, className="")
 {
 	return "<td class = '" + className + "'>" + content + "</td>";
 }
-
+	
 </script>
 
 <h1>Jade Delight</h1>
+
+<script> //editedbyme
+var styles = `
+    body { 
+        background-color: #00A36C;
+        color: white;
+        text-align: center;
+    }
+    
+    table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    select, input[type=button] {
+    	background-color: black;
+        color: white;
+        opacity: 40%
+    }
+    
+    select:hover, input[type=button]:hover {
+    	color: #00A36C;
+        background-color: white;
+        transition: 0.4s;
+        opacity: 100%
+    }
+    
+    input[type=text] {
+    	background-color: white;
+        opacity: 40%
+    }   
+`
+
+var styleSheet = document.createElement("style")
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);
+
+
+
+$(document).ready(function(){
+  $(".userInfo.address").hide();
+  
+  $("input[name='p_or_d'][value='delivery']").click(function() {
+ 	 $(".userInfo.address").show();
+  });
+  
+  $("input[name='p_or_d'][value='pickup']").click(function() {
+ 	 $(".userInfo.address").hide();
+  });  
+});
+//pickup/delivery hiding/showing implementation
+
+$(document).ready(function() {
+  $(".selectQuantity").change(function() {  
+    const a = parseFloat($(this).siblings(".cost").text().replace('$',''));
+    const q = $(this).children().val();
+    const totalpricething = (a * q).toFixed(2);
+    
+    $(this).siblings(".totalCost").children().val(totalpricething).trigger('change');
+  })
+  //item total cost implementation
+  
+  $(".totalCost").change(function() {
+  	var subtotalthing = 0;
+  	$(".totalCost").each(function() {
+  		subtotalthing += +$(this).children().val();
+  	});
+    
+    var tax = subtotalthing*0.0625;
+    var finaltotal = subtotalthing + tax;
+
+    $(".subtotal").children().val(subtotalthing.toFixed(2));
+    $(".tax").children().val(tax.toFixed(2));
+    $(".total").children().val(finaltotal.toFixed(2));
+  })
+  //subtotal cost implementation
+});
+//cost implementation
+</script>
+
 <form>
 
 <p class="userInfo"><label>First Name:</label> <input type="text"  name='fname' /></p>
@@ -51,6 +134,7 @@ function td(content, className="")
 	<input type="radio"  name='p_or_d' value = 'delivery'/>
 	Delivery
 </p>
+
 <table border="0" cellpadding="3">
   <tr>
     <th>Select Item</th>
@@ -58,6 +142,7 @@ function td(content, className="")
     <th>Cost Each</th>
     <th>Total Cost</th>
   </tr>
+  
 <script>
 
   var s = "";
@@ -73,6 +158,7 @@ function td(content, className="")
   document.writeln(s);
 </script>
 </table>
+
 <p class="subtotal totalSection"><label>Subtotal</label>: 
    $ <input type="text"  name='subtotal' id="subtotal" />
 </p>
@@ -85,5 +171,160 @@ function td(content, className="")
 <input type = "button" value = "Submit Order" />
 
 </form>
+
+<script> //editedbyme
+$(document).ready(function(){
+  $("input[type='button'][value='Submit Order']").click(function(){
+    
+    if ($("input[name='total']").val() == 0) {
+    	alert("Add at least one item.");
+    } //checks total input
+    
+    if (!$("input[name='lname']").val()) {
+    	alert("Enter required last name.");
+    } //checks name input
+    
+    let phonenumber = $("input[name='phone']").val();
+    //alert("Original input :" + phonenumber);
+    
+    let numberonly = phonenumber.replace(/\D/g,'');
+    //alert("Fixed input :" + numberonly);
+    
+    
+    if (numberonly.length > 10) {
+    	alert("Enter valid phone number. Entered numbers: " + numberonly + " and " + numberonly.length + " digit(s) long.");
+    } else if (numberonly.length < 7) {    
+    	alert("Enter valid phone number. Entered numbers: " + numberonly + " and " + numberonly.length + " digit(s) long.");
+    } else if (numberonly.length == 8) {    
+    	alert("Enter valid phone number. Entered numbers: " + numberonly + " and " + numberonly.length + " digit(s) long.");
+    } else if (numberonly.length == 9) {    
+    	alert("Enter valid phone number. Entered numbers: " + numberonly + " and " + numberonly.length + " digit(s) long.");
+    }
+    //checks phone input
+    
+    
+    if ($("input[name='p_or_d'][value='delivery']").is(':checked')) {
+        if (!$("input[name='street']").val()) {
+        	alert("Enter required street field.");
+        } //checks street input
+        
+        if (!$("input[name='city']").val()) {
+        	alert("Enter required city field.");
+        } //checks street input
+        
+        if ($("input[name='city']").val() && $("input[name='street']").val() && $("input[name='lname']").val() && $("input[name='total']").val() != 0 && numberonly.length == 7 || numberonly.length == 10) {
+        	const deliverytime = new Date(new Date().getTime()+(40*60*1000));
+    		
+            alert("Thank you for your order.");
+            
+            var order = window.open( "https://skookuri.github.io/cs20hw6/orderinfo", "_blank");
+            order.document.write("First Name: " + $("input[name='fname']").val());
+            order.document.write("<br>");
+            order.document.write("Last Name: " + $("input[name='lname']").val());
+            order.document.write("<br>");
+            order.document.write("Street: " + $("input[name='street']").val());
+            order.document.write("<br>");
+            order.document.write("City: " + $("input[name='city']").val());
+            order.document.write("<br>");
+            order.document.write("Phone Number: " + numberonly);
+            order.document.write("<br>");
+            
+            
+            
+            order.document.write("Quantity Chicken Chop Suey ordered: " + $('select[name="quan0"]').val());
+            order.document.write("<br>");
+            order.document.write("Total Cost for Chicken Chop Suey: $" + $('select[name="quan0"]').parent().siblings("td.totalCost").children().val());
+            order.document.write("<br>");
+        
+            order.document.write("Quantity Sweet and Sour Pork ordered: " + $('select[name="quan1"]').val());
+            order.document.write("<br>");
+            order.document.write("Total Cost for Sweet and Sour Pork: $" + $('select[name="quan1"]').parent().siblings("td.totalCost").children().val());
+            order.document.write("<br>");
+        
+            order.document.write("Quantity Shrimp Lo Mein ordered: " + $('select[name="quan2"]').val());
+            order.document.write("<br>");
+            order.document.write("Total Cost for Shrimp Lo Mein: $" + $('select[name="quan2"]').parent().siblings("td.totalCost").children().val());
+            order.document.write("<br>");
+        
+            order.document.write("Quantity Moo Shi Chicken ordered: " + $('select[name="quan3"]').val());
+            order.document.write("<br>");
+            order.document.write("Total Cost for Moo Shi Chicken: $" + $('select[name="quan3"]').parent().siblings("td.totalCost").children().val());
+            order.document.write("<br>");
+        
+            order.document.write("Quantity Fried Rice ordered: " + $('select[name="quan4"]').val());
+            order.document.write("<br>");
+            order.document.write("Total Cost for Fried Rice: $" + $('select[name="quan4"]').parent().siblings("td.totalCost").children().val());
+            order.document.write("<br>");
+            
+            
+            
+            order.document.write("Subtotal: $" + $(".subtotal").children().val());
+            order.document.write("<br>");
+            order.document.write("Mass tax 6.25%: $" + $(".tax").children().val());
+            order.document.write("<br>");
+            order.document.write("Total: $" + $(".total").children().val());
+            order.document.write("<br>");
+            
+            order.document.write("Estimated delivery time: " + deliverytime + ".");
+            order.document.write("<br>");
+        }
+        
+    } else if ($("input[name='p_or_d'][value='pickup']").is(':checked') && $("input[name='lname']").val() && $("input[name='total']").val() != 0 && numberonly.length == 7 || numberonly.length == 10) {
+      	const pickuptime = new Date(new Date().getTime()+(20*60*1000));
+    	
+        alert("Thank you for your order.");
+        
+        var order = window.open( "https://skookuri.github.io/cs20hw6/orderinfo", "height=600, width=600");
+        
+        order.document.write("First Name: " + $("input[name='fname']").val());
+        order.document.write("<br>");
+        order.document.write("Last Name: " + $("input[name='lname']").val());
+        order.document.write("<br>");
+        order.document.write("Phone Number: " + numberonly);
+        order.document.write("<br>");
+        
+        
+        
+        order.document.write("Quantity Chicken Chop Suey ordered: " + $('select[name="quan0"]').val());
+        order.document.write("<br>");
+        order.document.write("Total Cost for Chicken Chop Suey: $" + $('select[name="quan0"]').parent().siblings("td.totalCost").children().val());
+        order.document.write("<br>");
+        
+        order.document.write("Quantity Sweet and Sour Pork ordered: " + $('select[name="quan1"]').val());
+        order.document.write("<br>");
+        order.document.write("Total Cost for Sweet and Sour Pork: $" + $('select[name="quan1"]').parent().siblings("td.totalCost").children().val());
+        order.document.write("<br>");
+        
+        order.document.write("Quantity Shrimp Lo Mein ordered: " + $('select[name="quan2"]').val());
+        order.document.write("<br>");
+        order.document.write("Total Cost for Shrimp Lo Mein: $" + $('select[name="quan2"]').parent().siblings("td.totalCost").children().val());
+        order.document.write("<br>");
+        
+        order.document.write("Quantity Moo Shi Chicken ordered: " + $('select[name="quan3"]').val());
+        order.document.write("<br>");
+        order.document.write("Total Cost for Moo Shi Chicken: $" + $('select[name="quan3"]').parent().siblings("td.totalCost").children().val());
+        order.document.write("<br>");
+        
+        order.document.write("Quantity Fried Rice ordered: " + $('select[name="quan4"]').val());
+        order.document.write("<br>");
+        order.document.write("Total Cost for Fried Rice: $" + $('select[name="quan4"]').parent().siblings("td.totalCost").children().val());
+        order.document.write("<br>");
+        
+        
+        
+        order.document.write("Subtotal: $" + $(".subtotal").children().val());
+        order.document.write("<br>");
+        order.document.write("Mass tax 6.25%: $" + $(".tax").children().val());
+        order.document.write("<br>");
+        order.document.write("Total: $" + $(".total").children().val());
+        order.document.write("<br>");
+        
+        order.document.write("Estimated pickup time: " + pickuptime + ".");
+        order.document.write("<br>");
+        
+    }
+  });
+});
+</script>
 </body>
 </html>
